@@ -1,0 +1,38 @@
+function decodeURIComponentSafe(str) {
+    try {
+        return decodeURIComponent(str);
+    } catch (e) {
+        // If decoding fails, return the original string
+        return str;
+    }
+}
+
+function replaceKeywords(text, keywordMapping) {
+    for (const [keyword, replacement] of Object.entries(keywordMapping)) {
+        text = text.split(keyword).join(replacement);
+    }
+    return text;
+}
+
+function getTextFromUrl(url) {
+    const queryString = url.split('?')[1];
+
+    if (!queryString) {
+        return '';
+    }
+
+    const params = new URLSearchParams(queryString);
+    const keywordMapping = {
+        'dot': '.',
+        'coma': ',',
+        'exclamation': '!',
+        'question': '?',
+        'ampersand': '&',
+    };
+
+    const decodedTexts = Array.from(params.getAll('text'), decodeURIComponentSafe);
+
+    const processedTexts = decodedTexts.map(text => replaceKeywords(text, keywordMapping));
+
+    return processedTexts.join(' ');
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Debounced Fetch</title>
+    <link rel="stylesheet" type="text/css" href="./fetchdata/styles/index.css">
+</head>
+
+<body>
+    <div class="main">
+        <input class="form-control" placeholder="Я хочу найти..." id="searchInput" />
+    </div>
+
+    <script type="module" src="./fetchdata/scripts/index.js"></script>
+    <script type="module">
+        import fetchData from './fetchdata/scripts/index.js'; const searchInput = document.getElementById('searchInput'); fetchData(searchInput);
+    </script>
+</body>
+
+</html>
